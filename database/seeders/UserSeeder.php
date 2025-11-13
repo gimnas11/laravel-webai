@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // Create admin user
+        if (!User::where('email', 'admin@gchat.com')->exists()) {
+            User::create([
+                'name' => 'Admin',
+                'email' => 'admin@gchat.com',
+                'password' => Hash::make('4dminchat'),
+                'role' => 'admin',
+            ]);
+        }
+
+        // Create test user (optional)
+        if (!User::where('email', 'user@example.com')->exists()) {
+            User::create([
+                'name' => 'User',
+                'email' => 'user@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'user',
+            ]);
+        }
+    }
+}
